@@ -29,26 +29,42 @@
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="W8W-YQ-x7s">
                                                     <rect key="frame" x="5" y="5" width="109" height="80"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <integer key="value" value="10"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KDy-MJ-yvc">
-                                                    <rect key="frame" x="134" y="20" width="260" height="50"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Book Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KDy-MJ-yvc">
+                                                    <rect key="frame" x="134" y="5" width="260" height="25"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Book Description" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mvt-0Z-q3Q">
+                                                    <rect key="frame" x="134" y="30" width="260" height="55"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="11"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="KDy-MJ-yvc" secondAttribute="trailing" constant="20" id="GTi-rq-svZ"/>
+                                                <constraint firstItem="mvt-0Z-q3Q" firstAttribute="leading" secondItem="W8W-YQ-x7s" secondAttribute="trailing" constant="20" id="MTa-Qz-dkq"/>
                                                 <constraint firstItem="KDy-MJ-yvc" firstAttribute="leading" secondItem="W8W-YQ-x7s" secondAttribute="trailing" constant="20" id="RZ8-vW-o1n"/>
                                                 <constraint firstAttribute="bottom" secondItem="W8W-YQ-x7s" secondAttribute="bottom" constant="5" id="Wrf-mr-KAf"/>
                                                 <constraint firstItem="W8W-YQ-x7s" firstAttribute="top" secondItem="ATR-1b-9r8" secondAttribute="top" constant="5" id="Y6G-yG-G1C"/>
                                                 <constraint firstItem="W8W-YQ-x7s" firstAttribute="leading" secondItem="ATR-1b-9r8" secondAttribute="leading" constant="5" id="ZMG-Xn-nJ1"/>
-                                                <constraint firstAttribute="bottom" secondItem="KDy-MJ-yvc" secondAttribute="bottom" constant="20" id="aS0-gB-Cl7"/>
-                                                <constraint firstItem="KDy-MJ-yvc" firstAttribute="top" secondItem="ATR-1b-9r8" secondAttribute="top" constant="20" id="w3R-69-1RN"/>
+                                                <constraint firstAttribute="bottom" secondItem="KDy-MJ-yvc" secondAttribute="bottom" constant="60" id="aS0-gB-Cl7"/>
+                                                <constraint firstAttribute="bottom" secondItem="mvt-0Z-q3Q" secondAttribute="bottom" constant="5" id="d51-kG-NS0"/>
+                                                <constraint firstAttribute="trailing" secondItem="mvt-0Z-q3Q" secondAttribute="trailing" constant="20" id="fvc-eh-brI"/>
+                                                <constraint firstItem="mvt-0Z-q3Q" firstAttribute="top" secondItem="KDy-MJ-yvc" secondAttribute="bottom" id="gHo-En-GaG"/>
+                                                <constraint firstItem="KDy-MJ-yvc" firstAttribute="top" secondItem="ATR-1b-9r8" secondAttribute="top" constant="5" id="w3R-69-1RN"/>
                                                 <constraint firstAttribute="trailing" secondItem="W8W-YQ-x7s" secondAttribute="trailing" constant="300" id="xa2-hk-vRS"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="bookDescriptionLabel" destination="mvt-0Z-q3Q" id="MOa-2b-LmC"/>
                                             <outlet property="cellImageView" destination="W8W-YQ-x7s" id="CE3-qM-hiJ"/>
                                             <outlet property="cellTitleLabel" destination="KDy-MJ-yvc" id="5DN-RD-XRg"/>
                                             <segue destination="O27-7h-fZ2" kind="show" identifier="detailBookViewSegue" id="YZ3-5q-W9F"/>
@@ -89,6 +105,11 @@
                                     <constraint firstAttribute="width" constant="296" id="RbG-I8-HHz"/>
                                     <constraint firstAttribute="height" constant="326" id="fgJ-S5-pVg"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <integer key="value" value="12"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Book title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lOf-O0-QaN">
                                 <rect key="frame" x="89" y="524" width="236" height="63"/>

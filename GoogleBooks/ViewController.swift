@@ -35,6 +35,10 @@ class ViewController: UIViewController , UITableViewDelegate , UITableViewDataSo
     func callAPI(startFrom : Int64){
         let url = URL(string:"https://www.googleapis.com/books/v1/volumes?q=flowers&startIndex=\(startFrom)&maxResults=\(itemsPerPage)")!
         let task = URLSession.shared.dataTask(with: url) { jsonData, response, error in
+                
+            if(error != nil && jsonData == nil) {
+                print("Error loading the data : \(String(describing: error?.localizedDescription))")
+            } else {
                 do
                 {
                     let decoder = JSONDecoder()
@@ -48,36 +52,13 @@ class ViewController: UIViewController , UITableViewDelegate , UITableViewDataSo
                     DispatchQueue.main.async {
                         self.loadUI(books: booksData.items)
                     }
-                }
-                catch
-                {
+                } catch {
                     print("Error loading JSON : \(error.localizedDescription)")
                 }
             }
+            
+            }
         task.resume()
-    }
-    
-    
-    // MARK : Table view delegate methods
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as! CustomCell
-        cell.cellImageView.image = bookIn?.image
-        cell.cellTitleLabel.text = bookIn?.title
-        return cell
-    }
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("Number of rows : \(self.itemsPerPage)")
-        return Int(self.itemsPerPage)
-    }
-    
-    func scrollViewDidScrollToTop(_ scrollView: UIScrollView) {
-        // Refresh data
-        self.bookTableView.reloadData()
     }
     
     // MARK : UI Udate and response methods
@@ -87,8 +68,9 @@ class ViewController: UIViewController , UITableViewDelegate , UITableViewDataSo
         // numberOfPages
         // totalBooks
         // current page items : books
-        let bookInfo = books[2]
-        let imageUrl = bookInfo.volumeInfo.imageLinks.smallThumbnail
+        //let bookInfo = books[2]
+        let bukin = [books[2]]
+        let imageUrl = bukin[0].volumeInfo.imageLinks.smallThumbnail
         
 //        DispatchQueue.main.async {
 //            let task = URLSession.shared.dataTask(with: URL(string: imageUrl)!) { imageData, response, errr in
@@ -110,9 +92,10 @@ class ViewController: UIViewController , UITableViewDelegate , UITableViewDataSo
                     debugPrint("Error loading image : \(errr!.localizedDescription)")
                 } else {
                     let image = UIImage(data: imageData!)
-                    let title = bookInfo.volumeInfo.title
-                    let description = bookInfo.volumeInfo.description
+                    let title = bukin[0].volumeInfo.title
+                    let description = bukin[0].volumeInfo.description
                     self.bookIn = BookInfo(image: image!, title: title, description: description)
+                    BookInfo.book = BookInfo(image: image!, title: title, description: description)
                 }
             }
             task.resume()
@@ -138,5 +121,30 @@ class ViewController: UIViewController , UITableViewDelegate , UITableViewDataSo
             let vc = BookViewController()
             vc.updateBookInfo(bookInfo: bookIn!)
         }
+    }
+    
+    // MARK : Table view delegate methods
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as! CustomCell
+        cell.cellImageView.contentMode = .scaleAspectFill
+        cell.cellImageView.image = bookIn?.image
+        cell.cellTitleLabel.text = bookIn?.title
+        cell.bookDescriptionLabel.text = bookIn?.description
+        
+        return cell
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print("Number of rows : \(self.itemsPerPage)")
+        return Int(self.itemsPerPage)
+    }
+    
+    func scrollViewDidScrollToTop(_ scrollView: UIScrollView) {
+        // Refresh data
+        self.bookTableView.reloadData()
     }
 }

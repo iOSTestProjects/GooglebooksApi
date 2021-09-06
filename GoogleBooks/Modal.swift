@@ -20,9 +20,9 @@ struct Book : Decodable {
 }
 
 struct VolumeInfo : Decodable {
-    let imageLinks : Thumbnails
     let title : String
     let description : String
+    let imageLinks : Thumbnails
 }
 
 struct Thumbnails : Decodable {
@@ -31,6 +31,9 @@ struct Thumbnails : Decodable {
 }
 
 class BookInfo {
+    
+    static var book : BookInfo?
+    
     var image : UIImage
     var title : String
     var description : String
