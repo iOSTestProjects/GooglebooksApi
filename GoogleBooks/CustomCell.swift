@@ -13,15 +13,8 @@ class CustomCell: UITableViewCell {
     @IBOutlet weak var cellTitleLabel: UILabel!
     @IBOutlet weak var bookDescriptionLabel: UILabel!
     
-    func updateBookInfoInDetailView(bookInfo : BookInfo) {
-        let vc = BookViewController()
-        vc.bookImageView?.image = bookInfo.image
-        vc.bookTitleLabel?.text = bookInfo.title
-        vc.bookDescriptionView?.text = bookInfo.description
-    }
-    
     func setCellWith(bookInfo : BookInfo) {
-        cellImageView.image = bookInfo.image
+        cellImageView.image = bookInfo.smallImage
         cellTitleLabel.text = bookInfo.title
         bookDescriptionLabel.text = bookInfo.description
     }

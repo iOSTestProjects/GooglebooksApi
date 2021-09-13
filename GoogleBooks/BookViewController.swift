@@ -9,36 +9,32 @@ import Foundation
 import UIKit
 
 class BookViewController : UIViewController {
-    
+ 
     @IBOutlet weak var bookImageView: UIImageView?
     @IBOutlet weak var bookTitleLabel: UILabel?
-    @IBOutlet weak var bookDescriptionView: UITextView?
+    @IBOutlet weak var bookDescription: UITextView?
     
     var book : BookInfo?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.bookImageView?.contentMode = .scaleToFill
+        
+        self.bookImageView?.contentMode = .scaleAspectFill
         self.bookImageView?.backgroundColor = .purple
         
+        self.recieveInformation()
+        
         if(self.book != nil) {
-            self.bookImageView?.image = self.book?.image
-            self.bookTitleLabel?.text = self.book?.title
-            self.bookDescriptionView?.text = self.book?.description
+            print("Working")
         } else {
-            print("Wait for the function to load data first. Then launch view did load inside that function")
+            print("Book info object contains data and not nil")
         }
     }
     
-    func updateBookInfo(bookInfo : BookInfo) {
+    func recieveInformation() {
         
-        self.book = BookInfo(image: bookInfo.image, title: bookInfo.title, description: bookInfo.description)
-        
-        if(self.book == nil) {
-            print("Instance not initialised properly")
-        } else {
-            print("Instance initialised properly. If problem persists then check how to pass data among view controllers")
-            self.viewDidLoad()
-        }
+        self.bookImageView?.image = BookSet.bookRack?[0].largeImage
+        self.bookTitleLabel?.text = BookSet.bookRack?[0].title
+        self.bookDescription?.text = BookSet.bookRack?[0].description
     }
 }
